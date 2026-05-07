@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Best Virtual Tour</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#ebe5dd;
+  --bg2:#d8d0c5;
+  --text:#241f1b;
+  --muted:#6c645d;
+  --accent:#2b231e;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    var(--bg),
+    var(--bg2)
+  );
+
+  color:var(--text);
+}
+
+/* ================================= */
+/* NOISE */
+/* ================================= */
+
+body::before{
+  content:'';
+
+  position:fixed;
+  inset:0;
+
+  opacity:.05;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  background-image:
+  radial-gradient(circle at 20% 20%, rgba(0,0,0,.08) 1px, transparent 1px);
+
+  background-size:4px 4px;
+}
+
+/* ================================= */
+/* BLOBS */
+/* ================================= */
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.45;
+}
+
+.blob.one{
+  width:500px;
+  height:500px;
+
+  background:#fff0d9;
+
+  top:-140px;
+  left:-120px;
+
+  animation:blobMove 12s infinite alternate ease-in-out;
+}
+
+.blob.two{
+  width:420px;
+  height:420px;
+
+  background:#d5c3b4;
+
+  right:-100px;
+  bottom:-100px;
+
+  animation:blobMove 15s infinite alternate ease-in-out;
+}
+
+@keyframes blobMove{
+
+  from{
+    transform:translate(0px,0px) scale(1);
+  }
+
+  to{
+    transform:translate(-40px,30px) scale(1.12);
+  }
+
+}
+
+/* ================================= */
+/* PARTICLES */
+/* ================================= */
+
+.particles{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.particle{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.8);
+
+  animation:particle linear infinite;
+}
+
+@keyframes particle{
+
+  from{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+
+}
+
+/* ================================= */
+/* WRAPPER */
+/* ================================= */
+
+.wrapper{
+  width:100%;
+  height:100vh;
+
+  display:grid;
+  grid-template-columns:460px 1fr;
+}
+
+/* ================================= */
+/* LEFT */
+/* ================================= */
+
+.left{
+  padding:50px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  border-right:1px solid rgba(0,0,0,.06);
+
+  backdrop-filter:blur(10px);
+
+  z-index:5;
+}
+
+.logo{
+  font-size:11px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.logo span{
+  font-weight:600;
+  color:var(--text);
+}
+
+.content{
+  max-width:360px;
+}
+
+.slide-num{
+  font-size:11px;
+  letter-spacing:5px;
+  margin-bottom:28px;
+  color:#978b82;
+}
+
+.title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:74px;
+  line-height:.94;
+  font-weight:300;
+  margin-bottom:24px;
+}
+
+.title em{
+  color:#74655d;
+}
+
+.desc{
+  font-size:14px;
+  line-height:2;
+  color:var(--muted);
+  margin-bottom:34px;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:34px;
+}
+
+.meta span{
+  padding:10px 16px;
+
+  border-radius:100px;
+
+  background:rgba(255,255,255,.28);
+
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,.4);
+
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.cta{
+  display:flex;
+  gap:12px;
+}
+
+.btn{
+  height:54px;
+  padding:0 28px;
+
+  border:none;
+  border-radius:18px;
+
+  cursor:pointer;
+
+  transition:.35s ease;
+
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.btn-dark{
+  background:var(--accent);
+  color:white;
+
+  box-shadow:
+  0 20px 40px rgba(0,0,0,.16);
+}
+
+.btn-dark:hover{
+  transform:translateY(-5px);
+}
+
+.btn-glass{
+  background:rgba(255,255,255,.25);
+
+  backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,.4);
+
+  color:var(--text);
+}
+
+.bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.dots{
+  display:flex;
+  gap:10px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+
+  border-radius:999px;
+
+  background:#b9ada4;
+
+  cursor:pointer;
+
+  transition:.4s ease;
+}
+
+.dot.active{
+  width:48px;
+  background:#2d2520;
+}
+
+.nav{
+  display:flex;
+  gap:12px;
+}
+
+.nav button{
+  width:54px;
+  height:54px;
+
+  border:none;
+  border-radius:18px;
+
+  cursor:pointer;
+
+  transition:.35s ease;
+
+  background:rgba(255,255,255,.25);
+
+  backdrop-filter:blur(14px);
+}
+
+.nav button:hover{
+  transform:translateY(-5px);
+}
+
+/* ================================= */
+/* RIGHT */
+/* ================================= */
+
+.right{
+  position:relative;
+  overflow:hidden;
+  perspective:1800px;
+}
+
+.viewer{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.iso-wrap{
+  width:900px;
+  height:900px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transform-style:preserve-3d;
+
+  transition:transform .1s linear;
+}
+
+.float{
+  animation:float 5s infinite alternate ease-in-out;
+}
+
+@keyframes float{
+
+  from{
+    transform:translateY(10px);
+  }
+
+  to{
+    transform:translateY(-18px);
+  }
+
+}
+
+.iso-img{
+  width:100%;
+  max-width:820px;
+
+  object-fit:contain;
+
+  transition:.5s ease;
+
+  filter:
+  drop-shadow(0 80px 60px rgba(0,0,0,.18))
+  drop-shadow(0 20px 20px rgba(0,0,0,.1));
+}
+
+.session{
+  position:absolute;
+
+  top:50px;
+  right:40px;
+
+  writing-mode:vertical-rl;
+
+  transform:rotate(180deg);
+
+  letter-spacing:5px;
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  color:#8d8178;
+}
+
+/* ================================= */
+/* THUMBS */
+/* ================================= */
+
+.thumbs{
+  position:absolute;
+
+  right:30px;
+  bottom:30px;
+
+  display:flex;
+  gap:16px;
+}
+
+.thumb{
+  width:100px;
+  height:72px;
+
+  overflow:hidden;
+
+  border-radius:18px;
+
+  cursor:pointer;
+
+  transition:.4s ease;
+
+  border:1px solid rgba(255,255,255,.35);
+
+  backdrop-filter:blur(12px);
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.thumb.active{
+  transform:
+  translateY(-8px)
+  scale(1.08);
+
+  box-shadow:
+  0 20px 40px rgba(0,0,0,.15);
+}
+
+/* ================================= */
+/* DETAIL MODAL */
+/* ================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:30px;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+  opacity .5s ease,
+  visibility .5s ease;
+
+  background:
+  radial-gradient(circle at top, rgba(255,255,255,.08), transparent 60%),
+  rgba(14,12,10,.45);
+
+  backdrop-filter:
+  blur(24px)
+  saturate(140%);
+}
+
+.modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.modal-box{
+  width:100%;
+  max-width:1150px;
+
+  overflow:hidden;
+
+  display:grid;
+  grid-template-columns:1fr 430px;
+
+  border-radius:36px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.94),
+    rgba(244,237,230,.96)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+  0 60px 120px rgba(0,0,0,.28);
+
+  position:relative;
+
+  transform-style:preserve-3d;
+
+  transform:
+  perspective(1800px)
+  rotateX(10deg)
+  rotateY(-10deg)
+  scale(.84)
+  translateY(80px);
+
+  opacity:0;
+
+  transition:
+  transform 1s cubic-bezier(.16,1,.3,1),
+  opacity .8s ease;
+}
+
+.modal.active .modal-box{
+  opacity:1;
+
+  transform:
+  perspective(1800px)
+  rotateX(0deg)
+  rotateY(0deg)
+  scale(1)
+  translateY(0px);
+}
+
+.modal-image{
+  background:
+  linear-gradient(
+    180deg,
+    #ece3d8,
+    #dfd2c4
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:50px;
+}
+
+.modal-image img{
+  width:100%;
+  max-width:560px;
+
+  object-fit:contain;
+
+  animation:
+  modalFloat 4s infinite alternate ease-in-out;
+
+  filter:
+  drop-shadow(0 50px 50px rgba(0,0,0,.2))
+  drop-shadow(0 10px 20px rgba(0,0,0,.1));
+}
+
+@keyframes modalFloat{
+
+  from{
+    transform:translateY(0px);
+  }
+
+  to{
+    transform:translateY(-14px);
+  }
+
+}
+
+.modal-content{
+  padding:54px;
+  overflow:auto;
+
+  background:
+  linear-gradient(
+    180deg,
+    rgba(255,255,255,.82),
+    rgba(247,242,236,.9)
+  );
+}
+
+.modal-sub{
+  font-size:11px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:#7b6d64;
+  font-weight:600;
+  margin-bottom:24px;
+}
+
+.modal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:60px;
+  line-height:.94;
+  font-weight:300;
+  margin-bottom:24px;
+  color:#271f1b;
+}
+
+.modal-text{
+  font-size:14px;
+  line-height:2;
+  color:#5c534d;
+  margin-bottom:34px;
+}
+
+.modal-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.modal-item{
+  padding:22px;
+
+  border-radius:24px;
+
+  background:
+  linear-gradient(
+    180deg,
+    rgba(255,255,255,.68),
+    rgba(255,255,255,.38)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.7);
+}
+
+.modal-item h4{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  color:#312824;
+}
+
+.modal-item p{
+  font-size:13px;
+  line-height:1.8;
+  color:#625953;
+}
+
+.close{
+  position:absolute;
+
+  top:24px;
+  right:24px;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+
+  border-radius:20px;
+
+  cursor:pointer;
+
+  z-index:10;
+
+  background:
+  rgba(255,255,255,.8);
+
+  backdrop-filter:blur(12px);
+
+  color:#41352f;
+
+  font-size:20px;
+
+  transition:.35s ease;
+}
+
+.close:hover{
+  transform:
+  rotate(90deg)
+  scale(1.08);
+}
+
+/* ================================= */
+/* IFRAME MODAL */
+/* ================================= */
+
+.explore-modal{
+  position:fixed;
+  inset:0;
+
+  z-index:999999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:24px;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+  opacity .6s ease,
+  visibility .6s ease;
+
+  background:
+  radial-gradient(circle at top, rgba(255,255,255,.08), transparent 60%),
+  rgba(10,10,10,.55);
+
+  backdrop-filter:
+  blur(30px)
+  saturate(140%);
+}
+
+.explore-modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* ================================= */
+/* FLOATING TOP */
+/* ================================= */
+
+.explore-floating{
+  position:absolute;
+
+  top:26px;
+  left:28px;
+
+  z-index:20;
+
+  padding:
+  16px 22px;
+
+  border-radius:22px;
+
+  background:
+  rgba(255,255,255,.14);
+
+  backdrop-filter:
+  blur(18px);
+
+  border:
+  1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.18);
+}
+
+.explore-title{
+  font-size:11px;
+
+  letter-spacing:5px;
+
+  text-transform:uppercase;
+
+  color:white;
+
+  font-weight:500;
+}
+
+/* ================================= */
+/* FLOATING CLOSE */
+/* ================================= */
+
+.explore-close{
+  position:absolute;
+
+  top:26px;
+  right:28px;
+
+  z-index:25;
+
+  width:62px;
+  height:62px;
+
+  border:none;
+
+  border-radius:24px;
+
+  cursor:pointer;
+
+  background:
+  rgba(255,255,255,.16);
+
+  color:white;
+
+  font-size:24px;
+
+  backdrop-filter:
+  blur(18px);
+
+  border:
+  1px solid rgba(255,255,255,.18);
+
+  transition:.4s ease;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.18);
+}
+
+.explore-close:hover{
+
+  transform:
+  rotate(90deg)
+  scale(1.08);
+
+  background:
+  rgba(255,255,255,.26);
+
+}
+
+/* ================================= */
+/* FRAME BOX */
+/* ================================= */
+
+.explore-box{
+  width:100%;
+  height:100%;
+
+  max-width:1500px;
+  max-height:92vh;
+
+  overflow:hidden;
+
+  border-radius:38px;
+
+  position:relative;
+
+  background:
+  rgba(255,255,255,.08);
+
+  backdrop-filter:
+  blur(18px);
+
+  border:
+  1px solid rgba(255,255,255,.16);
+
+  box-shadow:
+  0 40px 120px rgba(0,0,0,.35);
+
+  transform-style:preserve-3d;
+
+  transform:
+  perspective(1800px)
+  rotateX(10deg)
+  rotateY(-10deg)
+  scale(.88);
+
+  transition:
+  transform 1s cubic-bezier(.16,1,.3,1),
+  opacity .6s ease;
+}
+
+.explore-modal.active .explore-box{
+
+  transform:
+  perspective(1800px)
+  rotateX(0deg)
+  rotateY(0deg)
+  scale(1);
+
+}
+
+/* ================================= */
+/* FRAME */
+/* ================================= */
+
+.explore-frame{
+  width:100%;
+  height:100%;
+
+  border:none;
+
+  background:black;
+}
+
+/* ================================= */
+/* MOBILE */
+/* ================================= */
+
+@media(max-width:980px){
+
+  html,
+  body{
+    overflow:auto;
+  }
+
+  .wrapper{
+    grid-template-columns:1fr;
+    min-height:100vh;
+  }
+
+  .left{
+    padding:30px 24px;
+    border-right:none;
+  }
+
+  .title{
+    font-size:52px;
+  }
+
+  .right{
+    min-height:72vh;
+  }
+
+  .session{
+    display:none;
+  }
+
+  .thumbs{
+    left:20px;
+    right:20px;
+
+    justify-content:center;
+  }
+
+  .thumb{
+    width:82px;
+    height:62px;
+  }
+
+  .cta{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .modal{
+    align-items:flex-end;
+    padding:0;
+  }
+
+  .modal-box{
+    border-radius:
+    32px 32px 0 0;
+
+    grid-template-columns:1fr;
+
+    max-height:92vh;
+
+    overflow:auto;
+  }
+
+  .modal-content{
+    padding:36px 24px 40px;
+  }
+
+  .modal-title{
+    font-size:42px;
+  }
+
+  .explore-modal{
+    padding:0;
+  }
+
+  .explore-box{
+    border-radius:0;
+
+    max-width:100%;
+    max-height:100%;
+
+    height:100vh;
+  }
+
+  .explore-close{
+    top:16px;
+    right:16px;
+
+    width:56px;
+    height:56px;
+
+    border-radius:20px;
+  }
+
+  .explore-floating{
+    top:16px;
+    left:16px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="blob one"></div>
+<div class="blob two"></div>
+
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+
+  <section class="left">
+
+    <div class="logo">
+      <span>Virtual Tour</span> ✦ GALLERY
+    </div>
+
+    <div class="content">
+
+      <div class="slide-num" id="slideNum">
+        01 / 03
+      </div>
+
+      <h1 class="title" id="title">
+        Rio <em>di</em><br>Pantai
+      </h1>
+
+      <p class="desc" id="desc">
+        Komposisi pesisir dengan pencahayaan hangat dan atmosfer sinematik modern.
+      </p>
+
+      <div class="meta" id="meta"></div>
+
+      <div class="cta">
+
+        <button class="btn btn-dark" id="exploreBtn">
+          Eksplorasi
+        </button>
+
+        <button class="btn btn-glass" id="detailBtn">
+          Lihat Detail
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="bottom">
+
+      <div class="dots" id="dots"></div>
+
+      <div class="nav">
+        <button id="prev">←</button>
+        <button id="next">→</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="right" id="tiltArea">
+
+    <div class="session" id="session">
+      Session 01 — Coast
+    </div>
+
+    <div class="viewer">
+
+      <div class="iso-wrap" id="isoWrap">
+
+        <div class="float">
+
+          <img
+            src="image/image(1).png"
+            class="iso-img"
+            id="heroImg"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="thumbs" id="thumbs"></div>
+
+  </section>
+
+</div>
+
+<!-- DETAIL MODAL -->
+
+<div class="modal" id="modal">
+
+  <button class="close" id="closeModal">
+    ✕
+  </button>
+
+  <div class="modal-box" id="modalBox">
+
+    <div class="modal-image">
+      <img id="modalImg">
+    </div>
+
+    <div class="modal-content">
+
+      <div class="modal-sub" id="modalSub"></div>
+
+      <h2 class="modal-title" id="modalTitle"></h2>
+
+      <p class="modal-text" id="modalText"></p>
+
+      <div class="modal-list">
+
+        <div class="modal-item">
+          <h4>Visual Atmosphere</h4>
+          <p id="visualText"></p>
+        </div>
+
+        <div class="modal-item">
+          <h4>Architectural Composition</h4>
+          <p id="archText"></p>
+        </div>
+
+        <div class="modal-item">
+          <h4>Immersive Feeling</h4>
+          <p id="feelText"></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- EXPLORE MODAL -->
+
+<div class="explore-modal" id="exploreModal">
+
+  <div class="explore-floating">
+
+    <div class="explore-title">
+      IMMERSIVE EXPERIENCE
+    </div>
+
+  </div>
+
+  <button class="explore-close" id="closeExplore">
+    ✕
+  </button>
+
+  <div class="explore-box" id="exploreBox">
+
+    <iframe
+      class="explore-frame"
+      id="exploreFrame"
+      allowfullscreen
+    ></iframe>
+
+  </div>
+
+</div>
+
+<script>
+
+/* ================================= */
+/* DATA */
+/* ================================= */
+
+const slides = [
+
+{
+  number:"01 / 03",
+  session:"Session 01 — Coast",
+  title:"Rio <em>di</em><br>Pantai",
+  image:"image/image(1).png",
+  url:"https://lampung-selatan.govirtual.id/riobythebeach/index.html#",
+
+  desc:"Komposisi pesisir dengan pencahayaan hangat dan atmosfer sinematik modern.",
+
+  meta:["Pesisir","Isometric","Tropical"],
+
+  detailText:"Area pesisir premium dengan ambience tropis immersive.",
+
+  visual:"Pencahayaan hangat dengan atmosfer cinematic.",
+
+  architecture:"Komposisi bertingkat menciptakan kedalaman visual.",
+
+  feeling:"Seperti berada di luxury digital exhibition."
+},
+
+{
+  number:"02 / 03",
+  session:"Session 02 — Heritage",
+  title:"Jembatan<br><em>Merah</em>",
+  image:"image/image(2).png",
+  url:"https://semarang.govirtual.id/kampungmelayu/index.html#jembatanmerah",
+
+  desc:"Struktur monumental dengan nuansa heritage modern.",
+
+  meta:["Historic","Urban","Bridge"],
+
+  detailText:"Heritage architecture dengan ambience urban futuristik.",
+
+  visual:"Kontras warna merah menciptakan focal point.",
+
+  architecture:"Struktur geometris monumental dan artistik.",
+
+  feeling:"Nuansa museum arsitektur modern."
+},
+
+{
+  number:"03 / 03",
+  session:"Session 03 — Agro",
+  title:"Taman<br><em>Agrowisata</em>",
+  image:"image/image(3).png",
+  url:"https://semarang.govirtual.id/agrocepoko/index.html#",
+
+  desc:"Lanskap hijau dengan atmosfer meditatif.",
+
+  meta:["Nature","Agro","Landscape"],
+
+  detailText:"Area hijau immersive dengan ritme visual harmonis.",
+
+  visual:"Dominasi warna hijau terasa relaxing.",
+
+  architecture:"Landscape modern dengan struktur natural.",
+
+  feeling:"Sensasi eco resort futuristik."
+}
+
+]
+
+/* ================================= */
+/* ELEMENTS */
+/* ================================= */
+
+const title = document.getElementById("title")
+const desc = document.getElementById("desc")
+const heroImg = document.getElementById("heroImg")
+const slideNum = document.getElementById("slideNum")
+const sessionText = document.getElementById("session")
+const meta = document.getElementById("meta")
+const dots = document.getElementById("dots")
+const thumbs = document.getElementById("thumbs")
+
+let current = 0
+
+/* ================================= */
+/* INIT */
+/* ================================= */
+
+slides.forEach((slide,index)=>{
+
+  const dot = document.createElement("div")
+
+  dot.className =
+  index === 0
+  ? "dot active"
+  : "dot"
+
+  dot.onclick = ()=>goTo(index)
+
+  dots.appendChild(dot)
+
+  const thumb = document.createElement("div")
+
+  thumb.className =
+  index === 0
+  ? "thumb active"
+  : "thumb"
+
+  thumb.innerHTML =
+  `<img src="${slide.image}">`
+
+  thumb.onclick = ()=>goTo(index)
+
+  thumbs.appendChild(thumb)
+
+})
+
+renderMeta()
+
+function renderMeta(){
+
+  meta.innerHTML = ""
+
+  slides[current].meta.forEach(item=>{
+
+    const span =
+    document.createElement("span")
+
+    span.textContent = item
+
+    meta.appendChild(span)
+
+  })
+
+}
+
+/* ================================= */
+/* GO TO */
+/* ================================= */
+
+function goTo(index){
+
+  const data = slides[index]
+
+  heroImg.style.opacity = 0
+  heroImg.style.transform = "scale(.92)"
+
+  setTimeout(()=>{
+
+    current = index
+
+    title.innerHTML = data.title
+    desc.textContent = data.desc
+    heroImg.src = data.image
+    slideNum.textContent = data.number
+    sessionText.textContent = data.session
+
+    renderMeta()
+
+    updateUI()
+
+    heroImg.style.opacity = 1
+    heroImg.style.transform = "scale(1)"
+
+  },300)
+
+}
+
+function updateUI(){
+
+  document.querySelectorAll(".dot")
+  .forEach((d,i)=>{
+    d.classList.toggle("active",i===current)
+  })
+
+  document.querySelectorAll(".thumb")
+  .forEach((t,i)=>{
+    t.classList.toggle("active",i===current)
+  })
+
+}
+
+/* ================================= */
+/* NAVIGATION */
+/* ================================= */
+
+document.getElementById("next")
+.onclick = ()=>{
+
+  goTo((current + 1) % slides.length)
+
+}
+
+document.getElementById("prev")
+.onclick = ()=>{
+
+  goTo((current - 1 + slides.length) % slides.length)
+
+}
+
+/* ================================= */
+/* TILT MAIN */
+/* ================================= */
+
+const tiltArea =
+document.getElementById("tiltArea")
+
+const isoWrap =
+document.getElementById("isoWrap")
+
+let targetX = 0
+let targetY = 0
+
+let currentX = 0
+let currentY = 0
+
+tiltArea.addEventListener("mousemove",(e)=>{
+
+  const rect =
+  tiltArea.getBoundingClientRect()
+
+  const x =
+  (e.clientX - rect.left - rect.width/2)
+  / rect.width
+
+  const y =
+  (e.clientY - rect.top - rect.height/2)
+  / rect.height
+
+  targetX = y * -18
+  targetY = x * 18
+
+})
+
+function animateTilt(){
+
+  currentX +=
+  (targetX - currentX) * .08
+
+  currentY +=
+  (targetY - currentY) * .08
+
+  isoWrap.style.transform =
+  `
+  rotateX(${currentX}deg)
+  rotateY(${currentY}deg)
+  `
+
+  requestAnimationFrame(animateTilt)
+
+}
+
+animateTilt()
+
+/* ================================= */
+/* PARTICLES */
+/* ================================= */
+
+const particles =
+document.getElementById("particles")
+
+for(let i=0;i<40;i++){
+
+  const p =
+  document.createElement("div")
+
+  p.className = "particle"
+
+  p.style.left =
+  Math.random()*100 + "vw"
+
+  p.style.animationDuration =
+  (8 + Math.random()*10) + "s"
+
+  p.style.animationDelay =
+  Math.random()*10 + "s"
+
+  particles.appendChild(p)
+
+}
+
+/* ================================= */
+/* DETAIL MODAL */
+/* ================================= */
+
+const modal =
+document.getElementById("modal")
+
+document.getElementById("detailBtn")
+.onclick = ()=>{
+
+  const data = slides[current]
+
+  document.getElementById("modalImg")
+  .src = data.image
+
+  document.getElementById("modalTitle")
+  .innerHTML = data.title
+
+  document.getElementById("modalSub")
+  .textContent = data.session
+
+  document.getElementById("modalText")
+  .textContent = data.detailText
+
+  document.getElementById("visualText")
+  .textContent = data.visual
+
+  document.getElementById("archText")
+  .textContent = data.architecture
+
+  document.getElementById("feelText")
+  .textContent = data.feeling
+
+  modal.classList.add("active")
+
+}
+
+document.getElementById("closeModal")
+.onclick = closeModal
+
+modal.addEventListener("click",(e)=>{
+
+  if(e.target === modal){
+
+    closeModal()
+
+  }
+
+})
+
+function closeModal(){
+
+  modal.classList.remove("active")
+
+}
+
+/* ================================= */
+/* MODAL TILT */
+/* ================================= */
+
+const modalBox =
+document.getElementById("modalBox")
+
+modalBox.addEventListener("mousemove",(e)=>{
+
+  if(window.innerWidth < 980) return
+
+  const rect =
+  modalBox.getBoundingClientRect()
+
+  const x =
+  (e.clientX - rect.left - rect.width/2)
+  / rect.width
+
+  const y =
+  (e.clientY - rect.top - rect.height/2)
+  / rect.height
+
+  modalBox.style.transform =
+  `
+  perspective(1800px)
+  rotateX(${y * -8}deg)
+  rotateY(${x * 8}deg)
+  scale(1)
+  translateY(0px)
+  `
+
+})
+
+modalBox.addEventListener("mouseleave",()=>{
+
+  modalBox.style.transform =
+  `
+  perspective(1800px)
+  rotateX(0deg)
+  rotateY(0deg)
+  scale(1)
+  translateY(0px)
+  `
+
+})
+
+/* ================================= */
+/* EXPLORE MODAL */
+/* ================================= */
+
+const exploreModal =
+document.getElementById("exploreModal")
+
+const exploreFrame =
+document.getElementById("exploreFrame")
+
+const exploreBox =
+document.getElementById("exploreBox")
+
+document.getElementById("exploreBtn")
+.onclick = ()=>{
+
+  exploreFrame.src =
+  slides[current].url
+
+  exploreModal.classList.add("active")
+
+}
+
+/* CLOSE EXPLORE */
+
+document.getElementById("closeExplore")
+.onclick = closeExplore
+
+exploreModal.addEventListener("click",(e)=>{
+
+  if(e.target === exploreModal){
+
+    closeExplore()
+
+  }
+
+})
+
+function closeExplore(){
+
+  exploreModal.classList.remove("active")
+
+  setTimeout(()=>{
+
+    exploreFrame.src = ""
+
+  },600)
+
+}
+
+/* TILT IFRAME */
+
+exploreBox.addEventListener("mousemove",(e)=>{
+
+  if(window.innerWidth < 980) return
+
+  const rect =
+  exploreBox.getBoundingClientRect()
+
+  const x =
+  (e.clientX - rect.left - rect.width/2)
+  / rect.width
+
+  const y =
+  (e.clientY - rect.top - rect.height/2)
+  / rect.height
+
+  exploreBox.style.transform =
+  `
+  perspective(1800px)
+  rotateX(${y * -6}deg)
+  rotateY(${x * 6}deg)
+  scale(1)
+  `
+
+})
+
+exploreBox.addEventListener("mouseleave",()=>{
+
+  exploreBox.style.transform =
+  `
+  perspective(1800px)
+  rotateX(0deg)
+  rotateY(0deg)
+  scale(1)
+  `
+
+})
+
+/* ================================= */
+/* KEYBOARD */
+/* ================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+  if(e.key === "ArrowRight"){
+
+    goTo((current + 1) % slides.length)
+
+  }
+
+  if(e.key === "ArrowLeft"){
+
+    goTo((current - 1 + slides.length) % slides.length)
+
+  }
+
+  if(e.key === "Escape"){
+
+    closeModal()
+    closeExplore()
+
+  }
+
+})
+
+</script>
+
+</body>
+</html>
